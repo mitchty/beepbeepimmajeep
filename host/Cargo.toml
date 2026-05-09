@@ -1,0 +1,10 @@
+[package]
+name = "host"
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[dependencies]
+shared = { path = "../shared" }
+
+[dev-dependencies]

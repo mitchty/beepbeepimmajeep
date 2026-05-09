@@ -1,0 +1,32 @@
+[package]
+name = "firmware"
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[profile.release]
+opt-level = "z"
+strip = true
+lto = "fat"
+panic = "abort"
+
+[[bin]]
+name = "firmware"
+test = false
+bench = false
+
+[dependencies]
+shared = { path = "../shared" }
+
+log                = { version = "0.4", default-features = false, features = ["max_level_debug", "release_max_level_info"] }
+esp-hal            = { version = "~1.1",  features = ["esp32c3", "unstable"] }
+esp-rtos           = { version = "~0.3",  features = ["esp32c3", "embassy"] }
+esp-backtrace      = { version = "~0.19", features = ["esp32c3", "panic-handler", "println"] }
+esp-println        = { version = "~0.17", features = ["esp32c3", "log-04"] }
+esp-bootloader-esp-idf = { version = "~0.5", features = ["esp32c3"] }
+
+embassy-executor   = { version = "~0.10" }
+embassy-time       = { version = "0.5" }
+
+portable-atomic = "~1.13"
+icm42670           = "~0.2"

@@ -1,0 +1,29 @@
+[workspace]
+members = [
+    "shared",
+    "firmware",
+    "host",
+]
+resolver = "2"
+
+[workspace.package]
+edition = "2024"
+license = "BlueOak-1.0.0"
+version = "0.0.1"
+
+# Profile for the embedded target minimize release size for the firmware
+[profile.release]
+opt-level  = "z" # slightly smaller than s
+lto        = "fat"
+panic      = "abort"
+strip      = false
+codegen-units = 1
+
+# This was an attempt at getting defmt to work
+# [profile.release.package.firmware]
+# strip = false
+
+# Profile used when running host tests / binaries (normal dev defaults are fine)
+[profile.dev]
+opt-level = 0
+debug     = true
